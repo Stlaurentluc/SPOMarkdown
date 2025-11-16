@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>BigD</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<p><a href="index.html">Retour à l’index</a></p>
+<p>Les « dimensions » du BIM ajoutent des couches d’information au
+modèle 3D. Chacune correspond à un usage ou à un service métier précis :
+plus la dimension augmente, plus le modèle sert à des processus
+décisionnels (planification, coût, exploitation, etc.). Voici une
+présentation pratique et orientée mise en œuvre de chaque dimension
+couramment utilisée.</p>
+<hr />
+<h3 id="d-géométrie-et-représentation-spatiale">3D — Géométrie et
+représentation spatiale</h3>
+<ul>
+<li><strong>Contenu</strong> : formes, volumes, positions,
+familles/objets paramétriques.</li>
+<li><strong>Usage principal</strong> : conception, coordination
+spatiale, détection de collisions.</li>
+<li><strong>Livrables typiques</strong> : modèles IFC/RVT par
+discipline, vues, coupes, nomenclatures de base.</li>
+<li><strong>Points clés</strong> : structuration par catégories/BIM
+uses; classifications (Uniclass, OmniClass); géométrie « exploitable »
+(pas seulement visuelle).</li>
+</ul>
+<hr />
+<h3 id="d-temps-phasage">4D — Temps / phasage</h3>
+<ul>
+<li><strong>Contenu</strong> : liens objet ↔︎ tâches; calendrier; durées;
+séquences.</li>
+<li><strong>Usage principal</strong> : simulation de chantier, phasage,
+détection de conflits temporels.</li>
+<li><strong>Livrables typiques</strong> : simulations 4D (animations),
+planning lié au modèle (MS Project, Primavera, ou via plugins).</li>
+<li><strong>Points clés</strong> : connecter identifiants d’objets
+(GUID/IFCID) aux tâches; maintenir traçabilité des versions
+temporelles.</li>
+</ul>
+<hr />
+<h3 id="d-coûts-et-quantités">5D — Coûts et quantités</h3>
+<ul>
+<li><strong>Contenu</strong> : quantités extraites du modèle, prix
+unitaires, métrés, courbes budgétaires.</li>
+<li><strong>Usage principal</strong> : estimation, budgétisation, suivi
+financier, scénarios « what‑if ».</li>
+<li><strong>Livrables typiques</strong> : métrés exportés (CSV/BCF/IFC),
+budgets liés à éléments du modèle, rapports d’écart.</li>
+<li><strong>Points clés</strong> : règles de quantification claires
+(quémander LOIN/NIR pour la granularité), lien entre nomenclature métier
+et codes coûts.</li>
+</ul>
+<hr />
+<h3 id="d-performance-énergétique-et-durabilité">6D — Performance
+énergétique et durabilité</h3>
+<ul>
+<li><strong>Contenu</strong> : paramètres thermiques, matériaux,
+simulations énergétiques, émissions carbone incorporées.</li>
+<li><strong>Usage principal</strong> : analyses énergétiques, conformité
+aux labels/standards durables, calcul d’empreinte carbone.</li>
+<li><strong>Livrables typiques</strong> : rapports d’analyse
+énergétique, données EPD, comparatifs de scénarios.</li>
+<li><strong>Points clés</strong> : normaliser les propriétés matériaux;
+exporter des jeux de données exploitables par outils d’analyse
+(EnergyPlus, IES).</li>
+</ul>
+<hr />
+<h3 id="d-exploitation-maintenance-et-gestion-des-actifs">7D —
+Exploitation, maintenance et gestion des actifs</h3>
+<ul>
+<li><strong>Contenu</strong> : fiches techniques, cycles d’entretien,
+garanties, numéros de série, fournisseurs.</li>
+<li><strong>Usage principal</strong> : GMAO, gestion d’actifs,
+interventions, documentation d’exploitation.</li>
+<li><strong>Livrables typiques</strong> : base de données d’actifs liée
+au modèle (IFC + propriétés), manuels, calendriers de maintenance.</li>
+<li><strong>Points clés</strong> : définir le LOIN pour l’exploitation;
+identifier propriétaires/responsabilités; fournir formats compatibles
+GMAO.</li>
+</ul>
+<hr />
+<h3 id="d-et-audelà-sécurité-logistique-jumeau-numérique-etc.">8D et
+au‑delà — Sécurité, logistique, jumeau numérique, etc.</h3>
+<ul>
+<li><strong>8D — Sécurité</strong> : plans de prévention, zones à
+risque, procédures chantier intégrées au modèle pour analyse de
+risques.</li>
+<li><strong>9D — Logistique et Lean</strong> : flux de matériaux,
+séquençage des livraisons, optimisation des ressources et du
+stockage.</li>
+<li><strong>10D — Jumeau numérique / IoT</strong> : intégration de
+données temps réel (capteurs), tableaux de bord opérationnels,
+rétroaction continue pour exploitation et optimisation.</li>
+<li><strong>Points clés</strong> : ces dimensions deviennent des cas
+d’usage métier composés (souvent hybrides) ; exigent gouvernance des
+données et APIs stables.</li>
+</ul>
+<hr />
+<h3 id="mise-en-œuvre-pragmatique-conseils-rapides">Mise en œuvre
+pragmatique — conseils rapides</h3>
+<ul>
+<li><strong>Définir les usages avant la modélisation</strong> : établir
+pour chaque dimension le LOIN/LODD requis, les formats et
+responsabilités.</li>
+<li><strong>Normaliser les propriétés</strong> : gabarits Revit/IFC,
+codes classification, noms de paramètres bilingues si nécessaire.</li>
+<li><strong>Traçabilité</strong> : lier objets ↔︎ tâches ↔︎ coûts ↔︎ fiches
+d’actifs via identifiants persistants (GUID/IFCID).</li>
+<li><strong>Validation</strong> : règles automatiques (Solibri,
+Simplebim, scripts Dynamo/Python) pour vérifier complétude et cohérence
+par dimension.</li>
+<li><strong>Interopérabilité</strong> : privilégier IFC, IDS, BCF et mVD
+pour garantir réutilisation multi‑outil et longévité des livrables.</li>
+<li><strong>Évolution progressive</strong> : commencer par 3D+4D ou
+3D+5D puis ajouter 6D/7D selon maturité organisationnelle.</li>
+</ul>
+<hr />
+<h3 id="outils-fréquemment-utilisés-par-dimension">Outils fréquemment
+utilisés par dimension</h3>
+<ul>
+<li>3D : Revit, Archicad, BlenderBIM<br />
+</li>
+<li>4D : Synchro, Navisworks + plugins de phasage, Dynamo liaisons
+Gantt<br />
+</li>
+<li>5D : CostX, Vico, plugins d’estimation (Revit → export métrés)<br />
+</li>
+<li>6D : IES, EnergyPlus, Sefaira<br />
+</li>
+<li>7D : FM platforms (Archibus, Maximo), export IFC enrichi pour
+GMAO<br />
+</li>
+<li>8–10D : plateformes IoT, jumeaux numériques (Azure Digital Twins,
+ThingWorx), outils de logistique</li>
+</ul>
+</body>
+</html>

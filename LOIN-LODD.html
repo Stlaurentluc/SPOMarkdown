@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>LOIN-LODD</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<p><a href="index.html">Retour à l’index</a></p>
+<h3
+id="livrable-1-tableau-loin-lodd-par-dimension-pour-exports-revit">Livrable
+1 — Tableau LOIN / LODD par dimension pour exports Revit</h3>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 25%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr>
+<th>Dimension</th>
+<th style="text-align: right;">Usage principal</th>
+<th>LODD (géométrie attendue)</th>
+<th>LOIN (propriétés minimales à fournir)</th>
+<th>Format de livraison recommandé</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3D</td>
+<td style="text-align: right;">Conception / coordination</td>
+<td>LOD 300 (géométrie exacte, familles paramétriques)</td>
+<td><strong>Type</strong>, <strong>FamilyName</strong>,
+<strong>GUID</strong>, <strong>ClassificationCode</strong>,
+<strong>Material</strong></td>
+<td>RVT, IFC (mVD filtre 3D)</td>
+</tr>
+<tr>
+<td>4D</td>
+<td style="text-align: right;">Phasage / planning</td>
+<td>LOD 300–350 (éléments positionnés, points d’ancrage)</td>
+<td><strong>ScheduleID</strong>, <strong>StartDate</strong>,
+<strong>Duration</strong>, <strong>SequenceID</strong>,
+<strong>RelationToTask</strong></td>
+<td>IFC + liaison tâches (CSV/ID mapping)</td>
+</tr>
+<tr>
+<td>5D</td>
+<td style="text-align: right;">Estimation / métrés</td>
+<td>LOD 300–400 (géométrie précise pour quantification)</td>
+<td><strong>Quantity (unit)</strong>, <strong>UnitCost</strong>,
+<strong>CostCode</strong>, <strong>MeasurementRule</strong></td>
+<td>IFC QTO export, CSV/BCF pour métrés</td>
+</tr>
+<tr>
+<td>6D</td>
+<td style="text-align: right;">Performance énergétique</td>
+<td>LOD 200–300 (géométrie suffisante pour simulation)</td>
+<td><strong>UValue</strong>, <strong>ThermalMass</strong>,
+<strong>MaterialType</strong>, <strong>EPDReference</strong></td>
+<td>IFC + gbXML / CSV propriétés matériaux</td>
+</tr>
+<tr>
+<td>7D</td>
+<td style="text-align: right;">Exploitation / maintenance</td>
+<td>LOD 400–500 (éléments fabriqués et installés)</td>
+<td><strong>AssetID</strong>, <strong>Manufacturer</strong>,
+<strong>SerialNumber</strong>, <strong>MaintenanceCycle</strong>,
+<strong>Warranty</strong>, <strong>DocumentLinks</strong></td>
+<td>IFC enrichi, COBie, export GMAO (CSV/IFC)</td>
+</tr>
+<tr>
+<td>8D</td>
+<td style="text-align: right;">Sécurité chantier</td>
+<td>LOD 200–300 (zones, barrières, accès temporaires)</td>
+<td><strong>HazardType</strong>, <strong>SafetyProcedureID</strong>,
+<strong>RestrictedZoneFlag</strong></td>
+<td>IFC + PDF/BCF pour procédures</td>
+</tr>
+<tr>
+<td>9D</td>
+<td style="text-align: right;">Logistique / lean</td>
+<td>LOD 200–350 (zones stockage, routes)</td>
+<td><strong>DeliveryWindow</strong>, <strong>StorageLocation</strong>,
+<strong>HandlingReq</strong></td>
+<td>IFC + CSV planning logistique</td>
+</tr>
+<tr>
+<td>10D</td>
+<td style="text-align: right;">Jumeau numérique / IoT</td>
+<td>LOD variable selon capteurs</td>
+<td><strong>SensorID</strong>, <strong>DataStreamID</strong>,
+<strong>TelemetrySchema</strong>, <strong>APIEndpoint</strong></td>
+<td>IFC + linked digital twin (JSON/API)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Remarques pratiques</strong> :
+<ul>
+<li>Toujours inclure <strong>GUID/IFCID</strong> persistants pour
+assurer traçabilité entre modèle, planning et base de coûts.<br />
+</li>
+<li>Pour chaque propriété LOIN, préciser le <strong>type</strong>,
+<strong>unité</strong>, et la <strong>source</strong> (gabarit Revit,
+table externe, saisie manuelle).<br />
+</li>
+<li>Utiliser des noms de paramètres standardisés et bilingues si
+nécessaire (ex. MaintenanceCycle / CycleEntretien).</li>
+</ul></li>
+</ul>
+<hr />
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Usage principal</th>
+<th>LODD (géométrie attendue)</th>
+<th>LOIN (propriétés minimales à fournir)</th>
+<th>Format de livraison recommandé</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3D</td>
+<td>Conception / coordination</td>
+<td>LOD 300; familles paramétriques</td>
+<td><strong>Type</strong>; <strong>FamilyName</strong>;
+<strong>GUID</strong>; <strong>ClassificationCode</strong>;
+<strong>Material</strong></td>
+<td>RVT; IFC (mVD filtre 3D)</td>
+</tr>
+<tr>
+<td>4D</td>
+<td>Phasage / planning</td>
+<td>LOD 300–350; éléments positionnés</td>
+<td><strong>ScheduleID</strong>; <strong>StartDate</strong>;
+<strong>Duration</strong>; <strong>SequenceID</strong>;
+<strong>RelationToTask</strong></td>
+<td>IFC + mapping CSV (GUID↔︎TaskID)</td>
+</tr>
+<tr>
+<td>5D</td>
+<td>Estimation / métrés</td>
+<td>LOD 300–400; géométrie précise</td>
+<td><strong>Quantity(unit)</strong>; <strong>UnitCost</strong>;
+<strong>CostCode</strong>; <strong>MeasurementRule</strong></td>
+<td>IFC QTO export; CSV</td>
+</tr>
+<tr>
+<td>6D</td>
+<td>Performance énergétique</td>
+<td>LOD 200–300; géométrie pour simulation</td>
+<td><strong>UValue</strong>; <strong>ThermalMass</strong>;
+<strong>MaterialType</strong>; <strong>EPDReference</strong></td>
+<td>IFC + gbXML; CSV propriétés matériaux</td>
+</tr>
+<tr>
+<td>7D</td>
+<td>Exploitation / maintenance</td>
+<td>LOD 400–500; éléments fabriqués/installés</td>
+<td><strong>AssetID</strong>; <strong>Manufacturer</strong>;
+<strong>SerialNumber</strong>; <strong>MaintenanceCycle</strong>;
+<strong>DocumentLinks</strong></td>
+<td>IFC enrichi; COBie; export GMAO (CSV)</td>
+</tr>
+<tr>
+<td>8D</td>
+<td>Sécurité chantier</td>
+<td>LOD 200–300; zones temporaires</td>
+<td><strong>HazardType</strong>; <strong>SafetyProcedureID</strong>;
+<strong>RestrictedZoneFlag</strong></td>
+<td>IFC + PDF/BCF procédures</td>
+</tr>
+<tr>
+<td>9D</td>
+<td>Logistique / Lean</td>
+<td>LOD 200–350; zones stockage/routes</td>
+<td><strong>DeliveryWindow</strong>; <strong>StorageLocation</strong>;
+<strong>HandlingReq</strong></td>
+<td>IFC + CSV planning logistique</td>
+</tr>
+<tr>
+<td>10D</td>
+<td>Jumeau numérique / IoT</td>
+<td>LOD variable selon capteurs</td>
+<td><strong>SensorID</strong>; <strong>DataStreamID</strong>;
+<strong>TelemetrySchema</strong>; <strong>APIEndpoint</strong></td>
+<td>IFC + JSON/API (digital twin)</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="livrable-2-checklist-de-validation-automatisable-solibri-simplebim-dynamo-python">Livrable
+2 — Checklist de validation automatisable (Solibri / Simplebim / Dynamo
+/ Python)</h3>
+<h4 id="configuration-générale-pré-export">Configuration générale
+(pré-export)</h4>
+<ul>
+<li>Confirmer usage du gabarit Revit avec paramètres LOIN définis et
+typés.<br />
+</li>
+<li>Vérifier présence et non-nullité des GUID/IFCID pour tous les
+éléments livrables.<br />
+</li>
+<li>Appliquer classifications obligatoires (Uniclass / OmniClass /
+CanBIM) sur chaque famille.</li>
+</ul>
+<h4 id="contrôles-3d-géométrie">Contrôles 3D (géométrie)</h4>
+<ol type="1">
+<li>Géométrie non-ouverte / pas de faces inversées.<br />
+</li>
+<li>Éléments superposés &gt; tolérance (ex. &gt; 5 mm) signalés.<br />
+</li>
+<li>Familles non partagées converties ou marquées.<br />
+Automation: clash rules + geometry validity checks (Solibri / Simplebim
+/ DynamoScript).</li>
+</ol>
+<h4 id="contrôles-4d-liens-planning">Contrôles 4D (liens planning)</h4>
+<ol type="1">
+<li>Chaque élément planifiable possède un <strong>ScheduleID</strong>
+lié à un task existant.<br />
+</li>
+<li>Dates (StartDate/Duration) valides et au format ISO
+(YYYY-MM-DD).<br />
+</li>
+<li>Séquences sans cycles (graph DAG) — vérifier l’absence de
+boucles.<br />
+Automation: script Python/Excel qui joint GUID ↔︎ TaskID et valide dates;
+importer dans Synchro/Navisworks pour simulation.</li>
+</ol>
+<h4 id="contrôles-5d-quantités-coûts">Contrôles 5D (quantités &amp;
+coûts)</h4>
+<ol type="1">
+<li>Règles de quantification appliquées (ex. murs → surface nettoyée,
+dalles → surface brute).<br />
+</li>
+<li>Toutes les unités conformes au standard projet (m, m2, m3, unité) et
+cohérentes.<br />
+</li>
+<li>Présence de <strong>UnitCost</strong> ou mapping vers tableau de
+prix.<br />
+Automation: exporter IFC → QTO; exécuter règles Simplebim ou script qui
+calcule quantités et compare au fichier de référence.</li>
+</ol>
+<h4 id="contrôles-6d-performance">Contrôles 6D (performance)</h4>
+<ol type="1">
+<li>Matériaux référencés avec <strong>UValue</strong> ou avec référence
+EPD.<br />
+</li>
+<li>Blocs thermiques fermés; zones d’enveloppe bien définies pour
+simulation.<br />
+</li>
+<li>Propriétés liées exportables en gbXML/IFC.<br />
+Automation: extraction paramétrique via Dynamo → génération gbXML;
+vérifier complétude avec script.</li>
+</ol>
+<h4 id="contrôles-7d-exploitation-gmao">Contrôles 7D (exploitation /
+GMAO)</h4>
+<ol type="1">
+<li>Chaque actif critique a un <strong>AssetID</strong>,
+<strong>Manufacturer</strong>, <strong>MaintenanceCycle</strong>, et
+<strong>DocumentLinks</strong>.<br />
+</li>
+<li>Liens vers manuels/documents fonctionnels (URL ou clé d’asset dans
+CDE).<br />
+</li>
+<li>Validation des formats acceptés par la GMAO cible (champ length,
+types).<br />
+Automation: mapping Revit → COBie/IFC; script de contrôle des champs
+COBie requis; import test dans plateforme FM (sandbox).</li>
+</ol>
+<h4 id="contrôles-8d10d-sécurité-logistique-jumeau">Contrôles 8D–10D
+(sécurité, logistique, jumeau)</h4>
+<ol type="1">
+<li>Zones à risque identifiées et typées.<br />
+</li>
+<li>Deliveries et storage location renseignés pour éléments
+logistiques.<br />
+</li>
+<li>Pour IoT, présence de <strong>DataStreamID</strong> et schéma
+JSON/schema registry.<br />
+Automation: contrôles sur attributs obligatoires; génération d’un
+rapport JSON/API pour ingestion par jumeau.</li>
+</ol>
+<h4 id="qualité-des-données-transversale">Qualité des données
+(transversale)</h4>
+<ul>
+<li>Pas de paramètres vides pour champs obligatoires.<br />
+</li>
+<li>Valeurs typées et unités normalisées; signaler anomalies (ex. string
+dans champ numérique).<br />
+</li>
+<li>Historique de versions et auteur/modification présents (metadata du
+fichier).</li>
+</ul>
+<h4 id="livrables-de-sortie-et-reporting">Livrables de sortie et
+reporting</h4>
+<ul>
+<li>Générer rapport de conformité (OK / Warning / Fail) par règle.<br />
+</li>
+<li>Produire trois exports : modèle (IFC), tableau d’informations
+(CSV/COBie), rapport de contrôle (PDF/CSV).<br />
+</li>
+<li>Inclure un fichier de mapping GUID ↔︎ TaskID ↔︎ CostCode (CSV).</li>
+</ul>
+<h4 id="automatisation-recommandée-stack-patterns">Automatisation
+recommandée (stack &amp; patterns)</h4>
+<ul>
+<li>Pré-validation dans Revit : Dynamo scripts pour filler/normaliser
+paramètres et injecter GUID/IDs.<br />
+</li>
+<li>Nettoyage/filtrage IFC : Simplebim pour appliquer mVD et
+enrichir/supprimer propriétés.<br />
+</li>
+<li>Règles métier et contrôles : Solibri pour ruleset visuel + Simplebim
+pour corrections massives.<br />
+</li>
+<li>Orchestration &amp; rapports : Python (IfcOpenShell + pandas) ou
+Node.js (IFC.js) pour pipelines CI (pré-commit export).<br />
+</li>
+<li>Intégration CDE : push automatique vers Catenda/Trimble/BIMcollab;
+lier rapport de conformité en tant que livrable.</li>
+</ul>
+<div style="page-break-after: always;">
+
+</div>
+</body>
+</html>

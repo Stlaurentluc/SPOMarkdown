@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>OpenBimLogiciel</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<p><a href="index.html">Retour à l’index</a></p>
+<h3 id="quest-ce-que-lopenbim">🌍 Qu’est-ce que l’openBIM ?</h3>
+<ul>
+<li><strong>openBIM</strong> est une initiative portée par
+<strong>buildingSMART International</strong>.</li>
+<li>Elle vise à garantir que les données BIM soient <strong>accessibles,
+pérennes et indépendantes des éditeurs</strong>.</li>
+<li>Elle repose sur des <strong>standards ouverts</strong> :
+<ul>
+<li><strong>IFC (Industry Foundation Classes)</strong> : format
+d’échange de modèles 3D et de données.</li>
+<li><strong>BCF (BIM Collaboration Format)</strong> : format d’échange
+de commentaires et de problèmes.</li>
+<li><strong>IDS (Information Delivery Specification)</strong> : spécifie
+les exigences d’information (LOIN).</li>
+<li><strong>mVD (Model View Definition)</strong> : filtre les données
+IFC selon un usage spécifique.</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="outils-compatibles-openbim">🧰 Outils compatibles openBIM</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 22%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr>
+<th>Outil</th>
+<th>Rôle</th>
+<th>Points forts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Revit</strong> (avec plugins)</td>
+<td>Modélisation</td>
+<td>Export IFC, support BCF via plugins (ex. BIMcollab, BCFier)</td>
+</tr>
+<tr>
+<td><strong>Archicad</strong></td>
+<td>Modélisation</td>
+<td>Forte compatibilité IFC, BCF natif</td>
+</tr>
+<tr>
+<td><strong>Vectorworks</strong></td>
+<td>Modélisation</td>
+<td>Export IFC certifié, bon pour architecture</td>
+</tr>
+<tr>
+<td><strong>Solibri</strong></td>
+<td>Validation</td>
+<td>Lecture IFC, vérification LOD/LOIN, règles personnalisées</td>
+</tr>
+<tr>
+<td><strong>Simplebim</strong></td>
+<td>Nettoyage IFC</td>
+<td>Filtrage, enrichissement, structuration des IFC</td>
+</tr>
+<tr>
+<td><strong>BIMcollab</strong></td>
+<td>Coordination</td>
+<td>Gestion des BCF, support IDS, suivi des exigences</td>
+</tr>
+<tr>
+<td><strong>Catenda Hub</strong></td>
+<td>CDE openBIM</td>
+<td>Visualisation IFC, gestion des livrables, suivi des LOIN</td>
+</tr>
+<tr>
+<td><strong>BlenderBIM</strong></td>
+<td>Open source</td>
+<td>Modélisation et édition IFC native, 100% openBIM</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="avantages-de-lopenbim">🔗 Avantages de l’openBIM</h3>
+<ul>
+<li><strong>Interopérabilité</strong> : chaque acteur peut utiliser son
+outil préféré.</li>
+<li><strong>Transparence</strong> : les données sont lisibles et
+vérifiables par tous.</li>
+<li><strong>Durabilité</strong> : les fichiers IFC restent exploitables
+à long terme.</li>
+<li><strong>Neutralité</strong> : pas de dépendance à un éditeur ou à un
+format propriétaire.</li>
+</ul>
+<hr />
+<h3 id="bonnes-pratiques-pour-luc">🧠 Bonnes pratiques pour Luc</h3>
+<p>Vu ton expertise en <strong>exports enrichis, classification, et
+hôtes contextuels</strong>, l’openBIM est un terrain fertile pour :</p>
+<ul>
+<li>Structurer tes exports Revit en <strong>IFC + IDS</strong>, avec des
+helpers pour enrichir les propriétés.</li>
+<li>Utiliser <strong>Simplebim</strong> pour filtrer et valider les
+données avant livraison.</li>
+<li>Intégrer <strong>BCF</strong> dans tes workflows de coordination
+pour tracer les problèmes.</li>
+<li>Documenter les exigences LOIN dans un format <strong>IDS</strong>
+lisible par Solibri ou BIMcollab.</li>
+</ul>
+<div style="page-break-after: always;">
+
+</div>
+</body>
+</html>
