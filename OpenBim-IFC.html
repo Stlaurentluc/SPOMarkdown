@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>OpenBim-IFC</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<p><strong>En bref :</strong><br />
+Pour monter une base de données BIM compatible avec IFC.js sur un
+bâtiment complexe comme le Stade olympique, il faut mobiliser
+<strong>des spécialistes techniques (développeurs, architectes
+logiciels), des experts BIM (interopérabilité, IFC/ISO 19650), et des
+gestionnaires d’exploitation (FM/maintenance)</strong>. La grande
+différence avec <strong>BIM Collaborate</strong> et
+<strong>Konekt</strong> est que ces derniers sont des solutions SaaS
+<em>clé en main</em> pour la phase projet, tandis qu’IFC.js est une
+<strong>boîte à outils open source</strong> qui demande une équipe
+technique pour bâtir une solution sur mesure, mais qui offre une liberté
+et une pérennité des données bien supérieures.</p>
+<hr />
+<h3 id="spécialistes-nécessaires">👥 Spécialistes nécessaires</h3>
+<ol type="1">
+<li><strong>Développeurs full-stack / BIM tech</strong>
+<ul>
+<li>Maîtrise de JavaScript/TypeScript, Node.js, APIs REST/GraphQL.<br />
+</li>
+<li>Intégration d’IFC.js pour parsing et visualisation.<br />
+</li>
+<li>Développement d’interfaces web pour la consultation des
+modèles.</li>
+</ul></li>
+<li><strong>Architectes logiciels / Data engineers</strong>
+<ul>
+<li>Conception du schéma de base de données (graphes, documents,
+SQL).<br />
+</li>
+<li>Indexation des propriétés IFC pour requêtes rapides.<br />
+</li>
+<li>Mise en place de pipelines ETL (Extract-Transform-Load) pour
+ingestion des modèles.</li>
+</ul></li>
+<li><strong>Experts BIM / Standards</strong>
+<ul>
+<li>Connaissance IFC, BCF, IDS, ISO 19650, LOIN/LOD.<br />
+</li>
+<li>Définition des livrables et validation des données.<br />
+</li>
+<li>Garantir l’interopérabilité et la conformité aux standards
+openBIM.</li>
+</ul></li>
+<li><strong>Facility managers / Exploitation</strong>
+<ul>
+<li>Définir les besoins en maintenance et gestion des actifs.<br />
+</li>
+<li>Vérifier que les données extraites sont utiles et exploitables au
+quotidien.<br />
+</li>
+<li>Participer à la conception des interfaces pour les utilisateurs
+finaux.</li>
+</ul></li>
+<li><strong>Administrateurs systèmes / DevOps</strong>
+<ul>
+<li>Gestion des serveurs, sécurité, CI/CD.<br />
+</li>
+<li>Mise en place de l’infrastructure cloud ou interne.<br />
+</li>
+<li>Surveillance des performances et évolutivité.</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="différences-avec-bim-collaborate-et-konekt">⚖️ Différences avec
+BIM Collaborate et Konekt</h3>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 32%" />
+<col style="width: 32%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th>Aspect</th>
+<th><strong>IFC.js / That Open Company</strong></th>
+<th><strong>BIM Collaborate (Autodesk)</strong></th>
+<th><strong>Konekt (ex-BimTrack)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Nature</strong></td>
+<td>Librairie open source, boîte à outils</td>
+<td>SaaS propriétaire intégré à ACC</td>
+<td>SaaS collaboratif multi-logiciels</td>
+</tr>
+<tr>
+<td><strong>Phase cible</strong></td>
+<td>Exploitation, maintenance, solutions sur mesure</td>
+<td>Conception/exécution, coordination de modèles</td>
+<td>Exécution, suivi des <em>issues</em> et communication</td>
+</tr>
+<tr>
+<td><strong>Interopérabilité</strong></td>
+<td>IFC, BCF, IDS, totalement ouvert</td>
+<td>Formats Autodesk (Revit, Navisworks)</td>
+<td>Multi-logiciels mais orienté gestion des enjeux</td>
+</tr>
+<tr>
+<td><strong>Flexibilité</strong></td>
+<td>Très élevée (API, personnalisation)</td>
+<td>Faible (cadre Autodesk imposé)</td>
+<td>Moyenne (flux prédéfinis mais ouverts)</td>
+</tr>
+<tr>
+<td><strong>Ressources humaines</strong></td>
+<td>Nécessite développeurs et architectes logiciels</td>
+<td>Utilisable directement par équipes projet</td>
+<td>Utilisable directement par équipes projet</td>
+</tr>
+<tr>
+<td><strong>Durabilité des données</strong></td>
+<td>Pérennité grâce aux standards openBIM</td>
+<td>Dépendance forte à Autodesk</td>
+<td>Données stockées dans plateforme SaaS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="à-retenir">📌 À retenir</h3>
+<ul>
+<li><strong>IFC.js</strong> → demande une équipe technique, mais permet
+de bâtir une solution sur mesure pour la <strong>gestion et
+maintenance</strong> d’un bâtiment unique, avec une interopérabilité
+totale et une pérennité des données.<br />
+</li>
+<li><strong>BIM Collaborate</strong> → outil clé en main pour la
+<strong>coordination en phase projet</strong>, mais enfermé dans
+l’écosystème Autodesk.<br />
+</li>
+<li><strong>Konekt</strong> → outil SaaS pour la <strong>communication
+et le suivi des enjeux</strong>, plus ouvert mais toujours
+commercial.</li>
+</ul>
+<p><strong>Réponse courte :</strong><br />
+Pour un bâtiment complexe comme le Stade olympique de Montréal, une base
+de données compatible avec IFC.js nécessiterait <strong>une
+infrastructure robuste (serveur + stockage), un schéma de données basé
+sur IFC/BCF/IDS, des outils de parsing et d’indexation (web-ifc,
+IFC.js), et une couche applicative pour exposer ces données via API ou
+interfaces web</strong>. L’objectif est de rendre le modèle navigable,
+interrogeable et exploitable pour la maintenance et la gestion du cycle
+de vie.</p>
+<hr />
+<h3 id="ressources-nécessaires">🏗️ Ressources nécessaires</h3>
+<h4 id="infrastructure-technique">1. <strong>Infrastructure
+technique</strong></h4>
+<ul>
+<li><strong>Serveurs/Cloud</strong> : hébergement scalable (Azure, AWS,
+GCP ou interne) pour supporter des fichiers IFC massifs (plusieurs
+Go).<br />
+</li>
+<li><strong>Stockage</strong> : base orientée documents ou graphes
+(MongoDB, PostgreSQL + PostGIS, Neo4j) pour gérer la complexité des
+relations entre objets.<br />
+</li>
+<li><strong>Indexation</strong> : moteur de recherche (ElasticSearch,
+Solr) pour requêtes rapides sur propriétés (ex. trouver toutes les
+portes avec FireRating &gt; 60 min).</li>
+</ul>
+<h4 id="schéma-de-données">2. <strong>Schéma de données</strong></h4>
+<ul>
+<li><strong>IFC (ISO 16739)</strong> : modèle pivot pour géométrie et
+propriétés.<br />
+</li>
+<li><strong>BCF (BIM Collaboration Format)</strong> : pour gérer les
+<em>issues</em> et annotations liées au modèle.<br />
+</li>
+<li><strong>IDS (Information Delivery Specification)</strong> : pour
+définir quelles données doivent être livrées et validées (ex.
+classification, LOIN).<br />
+</li>
+<li><strong>Mapping interne</strong> : transformer IFC en
+tables/collections adaptées (ex. <code>IfcWall</code> → table
+<code>Walls</code> avec attributs enrichis).</li>
+</ul>
+<h4 id="outils-logiciels">3. <strong>Outils logiciels</strong></h4>
+<ul>
+<li><strong>IFC.js / web-ifc</strong> : parsing IFC côté client et
+serveur, visualisation 3D dans navigateur.<br />
+</li>
+<li><strong>Middleware</strong> : scripts Node.js/Python pour extraire,
+transformer et charger les données IFC dans la base.<br />
+</li>
+<li><strong>API REST/GraphQL</strong> : exposer les données aux
+applications (maintenance, FM, dashboards).<br />
+</li>
+<li><strong>Viewer web</strong> : interface pour naviguer dans le modèle
+et interroger la base (ex. cliquer sur un objet → afficher ses
+propriétés).</li>
+</ul>
+<h4 id="ressources-humaines">4. <strong>Ressources
+humaines</strong></h4>
+<ul>
+<li><strong>Développeurs BIM/Full-stack</strong> : pour intégrer IFC.js,
+concevoir API et front-end.<br />
+</li>
+<li><strong>Experts BIM</strong> : pour définir le schéma de données,
+assurer conformité aux standards (ISO 19650, LOIN).<br />
+</li>
+<li><strong>Administrateurs systèmes</strong> : pour gérer la sécurité,
+les performances et la scalabilité.<br />
+</li>
+<li><strong>Facility managers</strong> : pour valider que les données
+sont utiles en exploitation (maintenance, inventaire, durabilité).</li>
+</ul>
+<hr />
+<h3 id="spécificité-dun-bâtiment-unique-comme-le-stade-olympique">⚖️
+Spécificité d’un bâtiment unique comme le Stade olympique</h3>
+<ul>
+<li><strong>Grande envergure</strong> : modèles IFC très volumineux →
+besoin de partitionner par zones (gradins, toiture, installations
+techniques).<br />
+</li>
+<li><strong>Unicité</strong> : éléments atypiques (toiture retractable,
+structures complexes) → enrichissement du schéma IFC avec propriétés
+personnalisées.<br />
+</li>
+<li><strong>Durée de vie longue</strong> : base de données doit être
+pérenne et évolutive, capable d’intégrer des mises à jour sur plusieurs
+décennies.<br />
+</li>
+<li><strong>Interopérabilité</strong> : garantir que les données restent
+exploitables même si les logiciels propriétaires évoluent ou
+disparaissent.</li>
+</ul>
+<hr />
+<h3 id="à-retenir-1">📌 À retenir</h3>
+<ul>
+<li><strong>Matériel/logiciel</strong> : serveur robuste, base orientée
+graphes/documents, IFC.js pour parsing/visualisation.<br />
+</li>
+<li><strong>Standards</strong> : IFC pour la structure, BCF pour les
+issues, IDS pour la validation.<br />
+</li>
+<li><strong>Compétences</strong> : développeurs, experts BIM, facility
+managers.<br />
+</li>
+<li><strong>Approche</strong> : partitionner le modèle, enrichir les
+données, exposer via API pour maintenance et gestion.</li>
+</ul>
+</body>
+</html>
