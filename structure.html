@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>structure</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<p>un <strong>gabarit structuré pour une analyse BIM</strong>, qui peut
+servir de canevas adaptable selon le projet, le niveau de maturité BIM
+et les standards (ISO 19650, CanBIM, LOD/LOIN). L’idée est d’avoir une
+hiérarchie : <strong>thèmes généraux → sous-thèmes → questions de
+base</strong>.</p>
+<h2 id="gabarit-danalyse-bim">🏗️ Gabarit d’analyse BIM</h2>
+<h3 id="contexte-général-du-projet">1. Contexte général du projet</h3>
+<ul>
+<li><strong>Objectifs du projet</strong>
+<ul>
+<li>Quels sont les objectifs principaux du projet (coût, délais,
+durabilité, qualité)?</li>
+<li>Le BIM est-il utilisé pour conception, coordination, exploitation,
+ou tout le cycle de vie?</li>
+</ul></li>
+<li><strong>Parties prenantes</strong>
+<ul>
+<li>Quels acteurs sont impliqués (maîtrise d’ouvrage, architectes,
+ingénieurs, entrepreneurs)?</li>
+<li>Quels rôles BIM sont définis (BIM Manager, Coordinateur,
+Modeleur)?</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="gouvernance-et-standards">2. Gouvernance et standards</h3>
+<ul>
+<li><strong>Normes et protocoles</strong>
+<ul>
+<li>Quelles normes sont appliquées (ISO 19650, CanBIM, autres)?</li>
+<li>Existe-t-il un BEP (BIM Execution Plan) ou un protocole BIM?</li>
+</ul></li>
+<li><strong>Niveaux de détail</strong>
+<ul>
+<li>Quels LOD/LOIN sont requis à chaque phase?</li>
+<li>Comment la traçabilité et la validation sont assurées?</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="processus-et-flux-de-travail">3. Processus et flux de
+travail</h3>
+<ul>
+<li><strong>Collaboration</strong>
+<ul>
+<li>Quels outils de coordination sont utilisés (CDE, plateformes
+collaboratives)?</li>
+<li>Comment sont gérés les échanges et validations?</li>
+</ul></li>
+<li><strong>Automatisation</strong>
+<ul>
+<li>Y a-t-il des scripts ou add-ins pour automatiser les exports,
+vérifications ou enrichissements?</li>
+<li>Comment est gérée la modularité et la réutilisation des
+routines?</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="modèle-et-données">4. Modèle et données</h3>
+<ul>
+<li><strong>Structure du modèle</strong>
+<ul>
+<li>Comment les catégories et familles sont organisées?</li>
+<li>Y a-t-il une logique de classification (Uniclass, OmniClass,
+IFC)?</li>
+</ul></li>
+<li><strong>Qualité des données</strong>
+<ul>
+<li>Les paramètres sont-ils cohérents, localisés, et enrichis?</li>
+<li>Comment est assurée la validation (clash detection, règles de
+qualité)?</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="usages-bim-spécifiques">5. Usages BIM spécifiques</h3>
+<ul>
+<li><strong>Coordination spatiale</strong>
+<ul>
+<li>Comment sont gérés les conflits entre disciplines?</li>
+</ul></li>
+<li><strong>Quantification et coûts</strong>
+<ul>
+<li>Le modèle est-il utilisé pour les métrés et estimations?</li>
+</ul></li>
+<li><strong>Simulation et analyse</strong>
+<ul>
+<li>Y a-t-il des simulations énergétiques, structurelles, ou de
+flux?</li>
+</ul></li>
+<li><strong>Exploitation et maintenance</strong>
+<ul>
+<li>Le modèle est-il prévu pour la gestion du bâtiment (FM, jumeau
+numérique)?</li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="livrables-et-communication">6. Livrables et communication</h3>
+<ul>
+<li><strong>Formats d’export</strong>
+<ul>
+<li>Quels formats sont livrés (IFC, RVT, DWG, PDF)?</li>
+<li>Comment est assurée la compatibilité et la durabilité des
+données?</li>
+</ul></li>
+<li><strong>Documentation</strong>
+<ul>
+<li>Existe-t-il des guides d’onboarding ou de validation?</li>
+<li>Comment est gérée la localisation (FR/EN, autres langues)?</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="exemple-de-structuration-des-questions">🎯 Exemple de
+structuration des questions</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 26%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr>
+<th>Thème général</th>
+<th>Sous-thème</th>
+<th>Question de base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contexte projet</td>
+<td>Objectifs</td>
+<td>Quels sont les objectifs BIM du projet?</td>
+</tr>
+<tr>
+<td>Gouvernance</td>
+<td>Normes</td>
+<td>Quelles normes BIM sont appliquées?</td>
+</tr>
+<tr>
+<td>Processus</td>
+<td>Collaboration</td>
+<td>Comment les échanges sont-ils centralisés?</td>
+</tr>
+<tr>
+<td>Modèle</td>
+<td>Classification</td>
+<td>Quelle logique de classification est utilisée?</td>
+</tr>
+<tr>
+<td>Usages</td>
+<td>Simulation</td>
+<td>Quelles analyses sont prévues avec le modèle?</td>
+</tr>
+<tr>
+<td>Livrables</td>
+<td>Formats</td>
+<td>Quels formats sont exigés pour les livrables?</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
